@@ -31,10 +31,12 @@ MyTorpedo.prototype.display = function()
 	}
 	this.scene.materialDefault.apply();
 	this.scene.pushMatrix();
-	this.scene.rotate(this.angXZ, 0, 1, 0);
   this.scene.translate(this.position[0],this.position[1],this.position[2]);
+	this.scene.rotate(this.angXZ, 0, 1, 0);
+
 	//this.scene.translate(-this.position[0],-this.position[1],-this.position[2]);
-	//this.scene.rotate(this.angY, 1, 0, 0);
+	this.scene.rotate(this.angY, 1, 0, 0);
+
 
     //Body
  	this.scene.pushMatrix();

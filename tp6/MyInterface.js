@@ -63,32 +63,32 @@ MyInterface.prototype.processKeyboard = function(event) {
 		}
 		case 87: case 119:{
 			console.log("Key 'W' pressed");
-			this.scene.submarine.moveForward(0.05);
+			this.scene.submarine.moveForward(0.025);
 			break;
 		}
 		case 83: case 115:{
 			console.log("Key 'S' pressed");
-			this.scene.submarine.moveBackward(0.05);
+			this.scene.submarine.moveBackward(0.025);
 			break;
 		}
 		case 80: case 112:{
 			console.log("Key 'P' pressed");
-			this.scene.submarine.periscope.moveUp(0.05);
+			this.scene.submarine.periscope.moveUp(0.025);
 			break;
 		}
 		case 76: case 108:{
 			console.log("Key 'L' pressed");
-			this.scene.submarine.periscope.moveDown(0.05);
+			this.scene.submarine.periscope.moveDown(0.025);
 			break;
 		}
 		case 81: case 113:{
 			console.log("Key 'Q' pressed");
-			this.scene.submarine.goUp(0.05);
+			this.scene.submarine.goUp(0.025);
 			break;
 		}
 		case 69: case 101:{
 			console.log("Key 'E' pressed");
-			this.scene.submarine.goDown(0.05);
+			this.scene.submarine.goDown(0.025);
 			break;
 		}
 

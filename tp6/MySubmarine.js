@@ -6,7 +6,7 @@
  	CGFobject.call(this,scene);
 
 	this.submarineX = 0;
-	this.submarineY = 3;
+	this.submarineY = 0;
 	this.submarineZ = 0;
 	this.speed = 0;
 	this.speedVer = 0;
@@ -65,7 +65,7 @@ this.choosenOption = 0;
   this.scene.pushMatrix();
  	this.scene.translate(this.submarineX,this.submarineY,this.submarineZ);
 	this.scene.rotate(this.ang * degToRad, 0, 1, 0);
-
+  this.scene.translate(0,0,-2);
 
  	//Body
  	this.scene.pushMatrix();
@@ -181,7 +181,7 @@ MySubmarine.prototype.update = function(){
 	this.submarineZ += Math.cos(this.ang * degToRad) * this.speed;
 	this.submarineY += this.speedVer;
 	this.propeller.setAngle(this.propellerAng);
-  this.torpedos[this.torpedoIndex].setInitialPosition(this.submarineX,this.submarineY-1.25,this.submarineZ+0.5);
+  this.torpedos[this.torpedoIndex].setInitialPosition(this.submarineX,this.submarineY-1.25,this.submarineZ-0.7);
   this.torpedos[this.torpedoIndex].setTorpedoDirection(Math.sin(this.ang* degToRad),0,Math.cos(this.ang*degToRad));
 
   for (var i = 0; i < this.torpedos.length; i++) {

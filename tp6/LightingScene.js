@@ -52,7 +52,7 @@ LightingScene.prototype.init = function(application) {
 	this.clock = new MyClock(this, 12, 1);
 	this.targets = [new  MyTarget(this, 5, 0, 5), new  MyTarget(this, 10, 0, 10)];
 	this.submarine = new MySubmarine(this);
-	this.torpedo = new MyTorpedo(this);
+	this.ball = new MyBall(this);
 
 	this.submarineAppearanceList = ['Yellow', 'Orange', 'Pink'];
 	this.currSubmarineAppearance = 0;
@@ -155,7 +155,7 @@ LightingScene.prototype.init = function(application) {
 
 	//apply texture to plane
 	this.seabedAppearance = new CGFappearance(this);
-	this.seabedAppearance.loadTexture("../resources/images/seabed2.jpg");
+	this.seabedAppearance.loadTexture("../resources/images/seabed.jpg");
 
 	this.setUpdatePeriod(1000/60);
 
@@ -237,7 +237,8 @@ LightingScene.prototype.display = function() {
 	this.pushMatrix();
 	this.translate(7.5, 0, 7.5);
 	this.rotate(-90 * degToRad, 1, 0, 0);
-	this.scale(15, 15, 0.2);
+	//this.scale(100, 100, 1);
+	this.scale(15,15,0.2);
 
 	//this.materialE.apply();
 	this.floor.display();
@@ -346,6 +347,13 @@ LightingScene.prototype.display = function() {
 	{
 		this.targets[i].display();
 	}
+
+	//BALL
+	this.pushMatrix();
+	this.materialDefault.apply();
+	//this.scale(0.7, 0.7, 0.7);
+	this.ball.display();
+	this.popMatrix();
 };
 
 LightingScene.prototype.update = function(currTime){

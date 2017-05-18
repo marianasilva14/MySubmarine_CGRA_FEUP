@@ -22,6 +22,7 @@ serialInclude([
 	'MyTarget.js',
 	'MyTorpedo.js',
 	'Bezier.js',
+	'MyBall.js',
 
 	main=function() {
 		var app = new CGFapplication(document.body);
