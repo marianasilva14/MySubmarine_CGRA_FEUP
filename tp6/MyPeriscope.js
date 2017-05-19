@@ -12,31 +12,32 @@ function MyPeriscope(scene) {
 
 	this.choosenOption = 0;
 
-	this.materialDefault = new CGFappearance(this);
+	this.materialDefault = new CGFappearance(this.scene);
 
 	this.yellowAppearance = new CGFappearance(this.scene);
 	this.yellowAppearance.setAmbient(0.3,0.3,0.3,1);
 	this.yellowAppearance.setDiffuse(0.8,0.8,0.8,1);
-	this.yellowAppearance.setSpecular(0.8,0.8,0.8,1);	
+	this.yellowAppearance.setSpecular(0.8,0.8,0.8,1);
 	this.yellowAppearance.setShininess(5);
 	this.yellowAppearance.loadTexture("../resources/images/yellow.jpg");
 
 	this.orangeAppearance = new CGFappearance(this.scene);
 	this.orangeAppearance.setAmbient(0.3,0.3,0.3,1);
 	this.orangeAppearance.setDiffuse(0.8,0.8,0.8,1);
-	this.orangeAppearance.setSpecular(0.8,0.8,0.8,1);	
+	this.orangeAppearance.setSpecular(0.8,0.8,0.8,1);
 	this.orangeAppearance.setShininess(5);
 	this.orangeAppearance.loadTexture("../resources/images/orange.jpg");
 
 	this.pinkAppearance = new CGFappearance(this.scene);
 	this.pinkAppearance.loadTexture("../resources/images/pink.jpg");
-	
+
 	this.periscopeAppearanceArray = [];
 	this.pinkAppearance.setAmbient(0.3,0.3,0.3,1);
 	this.pinkAppearance.setDiffuse(0.8,0.8,0.8,1);
-	this.pinkAppearance.setSpecular(0.8,0.8,0.8,1);	
+	this.pinkAppearance.setSpecular(0.8,0.8,0.8,1);
 	this.pinkAppearance.setShininess(5);
-	this.periscopeAppearanceArray.push(this.yellowAppearance,this.orangeAppearance, this.pinkAppearance);
+
+	this.periscopeAppearanceArray.push(this.materialDefault, this.yellowAppearance,this.orangeAppearance, this.pinkAppearance);
 
 };
 
@@ -48,7 +49,7 @@ MyPeriscope.prototype.display = function()
 	this.periscopeAppearanceArray[this.choosenOption].apply();
 
 	this.scene.translate(0, this.height, 0);
-	
+
  	//Periscope
  	this.scene.pushMatrix();
  	this.scene.scale(0.2,2,0.2);
@@ -96,7 +97,7 @@ MyPeriscope.prototype.moveUp = function(dx){
 }
 
 MyPeriscope.prototype.moveDown = function(dx){
-	
+
 	this.height = Math.max(-0.77, this.height - dx);
 	console.log(this.height);
 }

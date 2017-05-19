@@ -43,7 +43,7 @@ LightingScene.prototype.init = function(application) {
 	this.table = new MyTable(this);
 	this.wall = new Plane(this);
 	this.leftWall = new MyQuad(this, -0.5, 1.5, -0.5, 1.5);
-	this.floor = new MyQuad(this, 0, 10, 0, 12);
+	this.floor = new Plane(this, 0, 12, 0, 12, 20);
 	this.prism = new MyPrism(this, 8, 20);
 	this.cylinder = new MyCylinder(this, 8, 20);
 	this.lamp = new MyLamp(this, 20, 20);
@@ -54,7 +54,7 @@ LightingScene.prototype.init = function(application) {
 	this.submarine = new MySubmarine(this);
 	this.ball = new MyBall(this);
 
-	this.submarineAppearanceList = ['Yellow', 'Orange', 'Pink'];
+	this.submarineAppearanceList = ['None','Yellow', 'Orange', 'Pink'];
 	this.currSubmarineAppearance = 0;
 
 	// Materials
@@ -237,8 +237,8 @@ LightingScene.prototype.display = function() {
 	this.pushMatrix();
 	this.translate(7.5, 0, 7.5);
 	this.rotate(-90 * degToRad, 1, 0, 0);
-	//this.scale(100, 100, 1);
-	this.scale(15,15,0.2);
+	this.scale(100, 100, 0.2);
+	//this.scale(15,15,0.2);
 
 	//this.materialE.apply();
 	this.floor.display();
@@ -375,23 +375,30 @@ LightingScene.prototype.update = function(currTime){
 	if (!this.Luz4)
 		this.lights[3].disable();
 
+		if (this.currSubmarineAppearance == 'None')
+		{
+	 		this.submarine.choosenOption = 0;
+	 		this.submarine.propeller.choosenOption = 0;
+	 		this.submarine.periscope.choosenOption = 0;
+		}
+
 	if (this.currSubmarineAppearance == 'Yellow')
 	{
- 		this.submarine.choosenOption = 0;
- 		this.submarine.propeller.choosenOption = 0;
- 		this.submarine.periscope.choosenOption = 0;
+ 		this.submarine.choosenOption = 1;
+ 		this.submarine.propeller.choosenOption = 1;
+ 		this.submarine.periscope.choosenOption = 1;
 	}
 	if (this.currSubmarineAppearance == 'Orange')
 	{
-		this.submarine.choosenOption = 1;
-		this.submarine.propeller.choosenOption = 1;
- 		this.submarine.periscope.choosenOption = 1;
+		this.submarine.choosenOption = 2;
+		this.submarine.propeller.choosenOption = 2;
+ 		this.submarine.periscope.choosenOption = 2;
 	}
 	if (this.currSubmarineAppearance == 'Pink')
 	{
- 		this.submarine.choosenOption = 2;
-		this.submarine.propeller.choosenOption = 2;
- 		this.submarine.periscope.choosenOption = 2;
+ 		this.submarine.choosenOption = 3;
+		this.submarine.propeller.choosenOption = 3;
+ 		this.submarine.periscope.choosenOption = 3;
 	}
 
 	if(this.Relogio)

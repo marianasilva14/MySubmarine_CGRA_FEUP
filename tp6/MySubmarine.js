@@ -6,7 +6,7 @@
  	CGFobject.call(this,scene);
 
 	this.submarineX = 0;
-	this.submarineY = 0;
+	this.submarineY = 3;
 	this.submarineZ = 0;
 	this.speed = 0;
 	this.speedVer = 0;
@@ -29,7 +29,7 @@
 }
 this.choosenOption = 0;
 
-	this.materialDefault = new CGFappearance(this);
+	this.materialDefault = new CGFappearance(this.scene);
 
 	this.yellowAppearance = new CGFappearance(this.scene);
 	this.yellowAppearance.setAmbient(0.3,0.3,0.3,1);
@@ -53,7 +53,7 @@ this.choosenOption = 0;
 	this.pinkAppearance.loadTexture("../resources/images/pink.jpg");
 
 	this.submarineAppearanceArray = [];
-	this.submarineAppearanceArray.push(this.yellowAppearance,this.orangeAppearance, this.pinkAppearance);
+	this.submarineAppearanceArray.push(this.materialDefault, this.yellowAppearance,this.orangeAppearance, this.pinkAppearance);
  };
 
  MySubmarine.prototype = Object.create(CGFobject.prototype);
@@ -65,7 +65,6 @@ this.choosenOption = 0;
   this.scene.pushMatrix();
  	this.scene.translate(this.submarineX,this.submarineY,this.submarineZ);
 	this.scene.rotate(this.ang * degToRad, 0, 1, 0);
-  this.scene.translate(0,0,-2);
 
  	//Body
  	this.scene.pushMatrix();
@@ -181,7 +180,7 @@ MySubmarine.prototype.update = function(){
 	this.submarineZ += Math.cos(this.ang * degToRad) * this.speed;
 	this.submarineY += this.speedVer;
 	this.propeller.setAngle(this.propellerAng);
-  this.torpedos[this.torpedoIndex].setInitialPosition(this.submarineX,this.submarineY-1.25,this.submarineZ-0.7);
+  this.torpedos[this.torpedoIndex].setInitialPosition(this.submarineX-Math.sin(this.ang* degToRad)*-1,this.submarineY-1.25,this.submarineZ-Math.cos(this.ang*degToRad)*-1);
   this.torpedos[this.torpedoIndex].setTorpedoDirection(Math.sin(this.ang* degToRad),0,Math.cos(this.ang*degToRad));
 
   for (var i = 0; i < this.torpedos.length; i++) {
@@ -194,7 +193,7 @@ MySubmarine.prototype.goUp = function(dx)
 	this.speedVer += dx;
 	this.trapezeAngHor = -45 * degToRad;
 
-	if(this.speedVer == 0)
+	if(Math.abs(this.speedVer) < 0.01)
 		this.trapezeAngHor = 0;
 };
 
@@ -203,7 +202,7 @@ MySubmarine.prototype.goDown = function(dx)
 	this.speedVer -= dx;
 	this.trapezeAngHor = 45 * degToRad;
 
-	if(this.speedVer == 0)
+	if(Math.abs(this.speedVer) < 0.01)
 		this.trapezeAngHor = 0;
 };
 

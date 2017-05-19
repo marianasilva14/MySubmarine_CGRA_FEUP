@@ -8,37 +8,37 @@ function MyPropeller(scene) {
 	CGFobject.call(this,scene);
 
 	this.choosenOption = 0;
-    
+
     this.shape = new MyCylinder(this.scene, 40, 20);
 	this.head = new MyLamp(this.scene, 40, 20);
 	this.parallelepiped = new MyUnitCubeQuad(this.scene);
 	this.ang = 0;
 
-	//this.materialDefault = new CGFappearance(this);
+	this.materialDefault = new CGFappearance(this.scene);
 
 	this.yellowAppearance = new CGFappearance(this.scene);
 	this.yellowAppearance.setAmbient(0.3,0.3,0.3,1);
 	this.yellowAppearance.setDiffuse(0.8,0.8,0.8,1);
-	this.yellowAppearance.setSpecular(0.8,0.8,0.8,1);	
+	this.yellowAppearance.setSpecular(0.8,0.8,0.8,1);
 	this.yellowAppearance.setShininess(5);
 	this.yellowAppearance.loadTexture("../resources/images/yellow.jpg");
 
 	this.orangeAppearance = new CGFappearance(this.scene);
 	this.orangeAppearance.setAmbient(0.3,0.3,0.3,1);
 	this.orangeAppearance.setDiffuse(0.8,0.8,0.8,1);
-	this.orangeAppearance.setSpecular(0.8,0.8,0.8,1);	
+	this.orangeAppearance.setSpecular(0.8,0.8,0.8,1);
 	this.orangeAppearance.setShininess(5);
 	this.orangeAppearance.loadTexture("../resources/images/orange.jpg");
 
 	this.pinkAppearance = new CGFappearance(this.scene);
 	this.pinkAppearance.setAmbient(0.3,0.3,0.3,1);
 	this.pinkAppearance.setDiffuse(0.8,0.8,0.8,1);
-	this.pinkAppearance.setSpecular(0.8,0.8,0.8,1);	
+	this.pinkAppearance.setSpecular(0.8,0.8,0.8,1);
 	this.pinkAppearance.setShininess(5);
 	this.pinkAppearance.loadTexture("../resources/images/pink.jpg");
-	
+
 	this.propellerAppearanceArray = [];
-	this.propellerAppearanceArray.push(this.yellowAppearance,this.orangeAppearance, this.pinkAppearance);
+	this.propellerAppearanceArray.push(this.materialDefault, this.yellowAppearance,this.orangeAppearance, this.pinkAppearance);
 };
 
 MyPropeller.prototype = Object.create(CGFobject.prototype);
@@ -88,10 +88,10 @@ MyPropeller.prototype.display = function()
 	this.head.display();
  	this.scene.popMatrix();
 
-	
+
 }
 
 this.MyPropeller.prototype.setAngle = function(angle){
-	
+
 	this.ang += angle;
 }
