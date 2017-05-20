@@ -13,6 +13,7 @@ function MyTorpedo(scene,index) {
 	this.head = new MyLamp(this.scene, 40, 20);
 	this.trapeze = new MyTrapeze(this.scene);
 	this.bezier = new Bezier();
+	this.array=[0,0,0];
   this.t = 0;
 	this.ended = true;
 	this.angXZ = 0;
@@ -33,16 +34,16 @@ MyTorpedo.prototype.display = function()
 	}
 	this.scene.materialDefault.apply();
 	this.scene.pushMatrix();
-	//this.scene.translate(-this.position[0],-this.position[1],-this.position[2]);
+
 
   this.scene.translate(this.position[0],this.position[1],this.position[2]);
 	this.scene.rotate(this.angXZ, 0, 1, 0);
 
+	this.scene.rotate(-this.angY, 1, 0, 0);
+	this.scene.translate(0,0,-1);
 
-	this.scene.rotate(this.angY, 1, 0, 0);
 
-
-    //Body
+  //Body
  	this.scene.pushMatrix();
 	this.scene.scale(0.25,0.25,0.35);
  	this.scene.scale(0.7,1,4);
@@ -99,19 +100,45 @@ MyTorpedo.prototype.update = function(){
 		return;
 	}
 
-	this.t = 0.02;
+	this.t += 0.005;
 
-	var s = Math.sqrt(Math.pow(this.startPosition[0],2)+Math.pow(this.startPosition[1],2)+Math.pow(this.startPosition[2]))
+	var s = Math.sqrt(Math.pow(this.startPosition[0],2)+Math.pow(this.startPosition[1],2)+Math.pow(this.startPosition[2], 2));
 
-  this.bezierFunction(this.t,this.Position[0],this.Position[1],this.Position[2],
+this.array=
+  this.bezier.bezierFunction(this.t,this.startPosition[0],this.startPosition[1],this.startPosition[2],
       this.scene.targets[this.index].x,this.scene.targets[this.index].y,this.scene.targets[this.index].z,
         this.direction[0],this.direction[1],this.direction[2],s);
+
+				this.position[0]=this.array[0];
+				this.position[1]=this.array[1];
+				this.position[2]=this.array[2];
+
+this.array=
+  this.bezier.bezierDerivateFunction(this.t,this.startPosition[0],this.startPosition[1],this.startPosition[2],
+      this.scene.targets[this.index].x,this.scene.targets[this.index].y,this.scene.targets[this.index].z,
+        this.direction[0],this.direction[1],this.direction[2],s);
+
+this.direction[0]=this.array[0];
+this.direction[1]=this.array[1];
+this.direction[2]=this.array[2];
 
 	this.angY = Math.atan(this.direction[1]/Math.sqrt(Math.pow(this.direction[0],2)+Math.pow(this.direction[2],2)));
 	this.angXZ = Math.acos(this.direction[2]/Math.sqrt(Math.pow(this.direction[0],2)+Math.pow(this.direction[2],2)));
 
 	if(this.direction[0] < 0){
-		this.angXZ = -this.angXZ;
+		this.angXZ = -this.angXZ ;
+
 	}
 
+	if(this.t >1){
+		this.ended=true;
+	}
+
+	if(this.index == this.scene.targets.length){
+	    this.scene.submarine.hasTargets = false;
+	    return;
+	}
+	else {
+		this.index++;
+	}
 }

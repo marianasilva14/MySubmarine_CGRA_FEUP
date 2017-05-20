@@ -15,6 +15,7 @@
 	this.trapezeAngVer = 0;
 	this.trapezeAngHor = 0;
   this.torpedoIndex = 0;
+  this.hasTargets = true;
 
 	this.shape = new MyCylinder(this.scene, 40, 20);
 	this.head = new MyLamp(this.scene, 40, 20);
@@ -186,6 +187,7 @@ MySubmarine.prototype.update = function(){
   for (var i = 0; i < this.torpedos.length; i++) {
     this.torpedos[i].update();
   }
+
 };
 
 MySubmarine.prototype.goUp = function(dx)

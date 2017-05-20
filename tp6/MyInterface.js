@@ -94,7 +94,10 @@ MyInterface.prototype.processKeyboard = function(event) {
 
 		case 70: case 102:{
 			console.log("Key 'F' pressed");
-      this.scene.submarine.fireTorpedo();
+			//if(this.scene.submarine.hasTargets ==true){
+				//this.scene.submarine.fireTorpedo();
+			//}
+			this.scene.submarine.fireTorpedo();
 			break;
 		}
 	};
