@@ -39,7 +39,7 @@ MyTorpedo.prototype.display = function()
   this.scene.translate(this.position[0],this.position[1],this.position[2]);
 	this.scene.rotate(this.angXZ, 0, 1, 0);
 
-	this.scene.rotate(-this.angY, 1, 0, 0);
+	this.scene.rotate(this.angY, 1, 0, 0);
 	this.scene.translate(0,0,-1);
 
 
@@ -102,7 +102,7 @@ MyTorpedo.prototype.update = function(){
 
 	this.t += 0.005;
 
-	var s = Math.sqrt(Math.pow(this.startPosition[0],2)+Math.pow(this.startPosition[1],2)+Math.pow(this.startPosition[2], 2));
+	var s = Math.sqrt(Math.pow(this.direction[0],2)+Math.pow(this.direction[1],2)+Math.pow(this.direction[2], 2));
 
 this.array=
   this.bezier.bezierFunction(this.t,this.startPosition[0],this.startPosition[1],this.startPosition[2],
@@ -118,28 +118,17 @@ this.array=
       this.scene.targets[this.index].x,this.scene.targets[this.index].y,this.scene.targets[this.index].z,
         this.direction[0],this.direction[1],this.direction[2],s);
 
-this.direction[0]=this.array[0];
-this.direction[1]=this.array[1];
-this.direction[2]=this.array[2];
 
-	this.angY = Math.atan(this.direction[1]/Math.sqrt(Math.pow(this.direction[0],2)+Math.pow(this.direction[2],2)));
-	this.angXZ = Math.acos(this.direction[2]/Math.sqrt(Math.pow(this.direction[0],2)+Math.pow(this.direction[2],2)));
+	//this.angY = Math.atan(this.array[1]/Math.sqrt(Math.pow(this.array[0],2)+Math.pow(this.array[2],2)));
+	//this.angXZ = Math.acos(this.array[2]/Math.sqrt(Math.pow(this.array[0],2)+Math.pow(this.array[2],2)));
 
-	if(this.direction[0] < 0){
-		this.angXZ = -this.angXZ ;
-
-	}
+	this.angXZ = Math.atan2(this.array[0],this.array[2]);
+  this.angY = -Math.atan2(this.array[1],Math.sqrt(this.array[2]*this.array[2] + this.array[0]*this.array[0]));
 
 	if(this.t >1){
 		this.ended=true;
+		this.scene.targets[this.index].explode();
+
 	}
-/*
-	if(this.index == this.scene.targets.length){
-	    this.scene.submarine.hasTargets = false;
-	    return;
-	}
-	else {
-		this.index++;
-	}
-	*/
+
 }

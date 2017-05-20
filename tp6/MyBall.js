@@ -16,13 +16,11 @@ MyBall.prototype.constructor=MyBall;
 MyBall.prototype.display = function()
 {
     this.scene.pushMatrix();
-    this.scene.translate(7,0,7);
 		this.scene.ballAppearance.apply();
 		this.ball.display();
     this.scene.popMatrix();
 
 		this.scene.pushMatrix();
-    this.scene.translate(7,0,7);
 		this.scene.rotate(Math.PI, 0, 1, 0);
 		this.scene.ballAppearance.apply();
 		this.ball.display();

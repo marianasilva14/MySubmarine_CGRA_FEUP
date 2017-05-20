@@ -176,13 +176,6 @@ LightingScene.prototype.display = function() {
 	{
 		this.targets[i].display();
 	}
-
-	//BALL
-	this.pushMatrix();
-	this.materialDefault.apply();
-	//this.scale(0.7, 0.7, 0.7);
-	this.ball.display();
-	this.popMatrix();
 };
 
 LightingScene.prototype.update = function(currTime){
@@ -230,9 +223,13 @@ LightingScene.prototype.update = function(currTime){
  		this.submarine.periscope.choosenOption = 3;
 	}
 
+
 	if(this.Relogio)
 		this.clock.update(currTime);
 
 	this.submarine.update();
 
+for(var i=0; i < this.targets.length;i++){
+	this.targets[i].update();
+}
 };

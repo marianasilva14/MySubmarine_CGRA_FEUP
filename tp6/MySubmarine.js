@@ -144,7 +144,9 @@ this.choosenOption = 0;
   this.scene.popMatrix();
 
   for (var i = 0; i < this.torpedos.length; i++) {
+    this.scene.pushMatrix();
     this.torpedos[i].display();
+    this.scene.popMatrix();
   }
 
 
@@ -181,8 +183,10 @@ MySubmarine.prototype.update = function(){
 	this.submarineZ += Math.cos(this.ang * degToRad) * this.speed;
 	this.submarineY += this.speedVer;
 	this.propeller.setAngle(this.propellerAng);
+  if(this.hasTargets){
   this.torpedos[this.torpedoIndex].setInitialPosition(this.submarineX-Math.sin(this.ang* degToRad)*-1,this.submarineY-1.25,this.submarineZ-Math.cos(this.ang*degToRad)*-1);
   this.torpedos[this.torpedoIndex].setTorpedoDirection(Math.sin(this.ang* degToRad),0,Math.cos(this.ang*degToRad));
+}
 
   for (var i = 0; i < this.torpedos.length; i++) {
     this.torpedos[i].update();
@@ -209,6 +213,16 @@ MySubmarine.prototype.goDown = function(dx)
 };
 
 MySubmarine.prototype.fireTorpedo = function(){
+  if(this.hasTargets === true){
+
   this.torpedos[this.torpedoIndex].setInitialPosition(this.submarineX,this.submarineY,this.submarineZ);
+  this.torpedos[this.torpedoIndex].setTorpedoDirection(Math.sin(this.ang* degToRad),0,Math.cos(this.ang*degToRad));
   this.torpedos[this.torpedoIndex].ended = false;
+  //this.torpedoIndex++;
+
+  if(this.torpedoIndex == this.scene.targets.length){
+      this.hasTargets = false;
+      return;
+  }
 }
+};
