@@ -12,6 +12,8 @@ function MyTorpedo(scene,index) {
   this.shape = new MyCylinder(this.scene, 40, 20);
 	this.head = new MyLamp(this.scene, 40, 20);
 	this.trapeze = new MyTrapeze(this.scene);
+	this.bezier = new Bezier();
+  this.t = 0;
 	this.ended = true;
 	this.angXZ = 0;
 	this.angY=0;
@@ -96,6 +98,14 @@ MyTorpedo.prototype.update = function(){
 	if(this.ended){
 		return;
 	}
+
+	this.t = 0.02;
+
+	var s = Math.sqrt(Math.pow(this.startPosition[0],2)+Math.pow(this.startPosition[1],2)+Math.pow(this.startPosition[2]))
+
+  this.bezierFunction(this.t,this.Position[0],this.Position[1],this.Position[2],
+      this.scene.targets[this.index].x,this.scene.targets[this.index].y,this.scene.targets[this.index].z,
+        this.direction[0],this.direction[1],this.direction[2],s);
 
 	this.angY = Math.atan(this.direction[1]/Math.sqrt(Math.pow(this.direction[0],2)+Math.pow(this.direction[2],2)));
 	this.angXZ = Math.acos(this.direction[2]/Math.sqrt(Math.pow(this.direction[0],2)+Math.pow(this.direction[2],2)));
