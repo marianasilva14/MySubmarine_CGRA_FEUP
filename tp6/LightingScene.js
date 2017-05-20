@@ -41,7 +41,6 @@ LightingScene.prototype.init = function(application) {
 	// Scene elements
 
 	this.floor = new Plane(this, 0, 12, 0, 12, 20);
-	this.prism = new MyPrism(this, 8, 20);
 	this.cylinder = new MyCylinder(this, 8, 20);
 	this.lamp = new MyLamp(this, 20, 20);
 	this.clock = new MyClock(this, 12, 1);
