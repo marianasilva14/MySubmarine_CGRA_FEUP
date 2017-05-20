@@ -133,7 +133,7 @@ this.direction[2]=this.array[2];
 	if(this.t >1){
 		this.ended=true;
 	}
-
+/*
 	if(this.index == this.scene.targets.length){
 	    this.scene.submarine.hasTargets = false;
 	    return;
@@ -141,4 +141,5 @@ this.direction[2]=this.array[2];
 	else {
 		this.index++;
 	}
+	*/
 }
