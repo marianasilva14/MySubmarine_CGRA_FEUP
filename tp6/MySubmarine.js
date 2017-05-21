@@ -215,10 +215,10 @@ MySubmarine.prototype.goDown = function(dx)
 MySubmarine.prototype.fireTorpedo = function(){
   if(this.hasTargets === true){
 
-  this.torpedos[this.torpedoIndex].setInitialPosition(this.submarineX,this.submarineY,this.submarineZ);
+  this.torpedos[this.torpedoIndex].setInitialPosition(this.submarineX-Math.sin(this.ang* degToRad)*-1,this.submarineY-1.25,this.submarineZ-Math.cos(this.ang*degToRad)*-1);
   this.torpedos[this.torpedoIndex].setTorpedoDirection(Math.sin(this.ang* degToRad),0,Math.cos(this.ang*degToRad));
   this.torpedos[this.torpedoIndex].ended = false;
-  //this.torpedoIndex++;
+  this.torpedoIndex++;
 
   if(this.torpedoIndex == this.scene.targets.length){
       this.hasTargets = false;

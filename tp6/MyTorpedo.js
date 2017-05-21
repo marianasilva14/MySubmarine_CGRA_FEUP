@@ -88,7 +88,7 @@ MyTorpedo.prototype.display = function()
 
 MyTorpedo.prototype.setInitialPosition = function (x,y,z) {
 	this.startPosition =[x,y,z];
-	this.position = this.startPosition;
+	this.position=[x,y,z];
 };
 
 MyTorpedo.prototype.setTorpedoDirection = function(x,y,z){
